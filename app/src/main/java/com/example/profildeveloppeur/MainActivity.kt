@@ -150,7 +150,7 @@ fun DeveloperFile(
     modifier: Modifier = Modifier
 ) {
     Surface(
-        color = Color.White,
+        color = MaterialTheme.colorScheme.background,
         modifier = modifier
             .clickable(
                 role = Role.Button,
@@ -222,16 +222,14 @@ fun DeveloperHeading(
     title: String,
     modifier: Modifier = Modifier
 ) {
-    Surface(color = Color.LightGray) {
+    Surface(color = Color.LightGray, shape = MaterialTheme.shapes.medium) {
         Column {
             DeveloperName(
                 name = name,
-                fontSize = 35,
                 modifier = modifier
             )
             DeveloperTitle(
                 title = title,
-                fontSize = 25,
                 modifier = modifier
             )
 
@@ -242,26 +240,25 @@ fun DeveloperHeading(
 @Composable
 fun DeveloperName(
     name: String,
-    fontSize: Int,
     modifier: Modifier = Modifier
 ) {
     Text(
         text = name,
         style = MaterialTheme.typography.headlineMedium,
         modifier = modifier,
-        color = Color.Red
+        color = MaterialTheme.colorScheme.primary
     )
 }
 
 @Composable
 fun DeveloperTitle(
     title: String,
-    fontSize: Int,
     modifier: Modifier = Modifier
 ) {
     Text(
         text = title,
         style = MaterialTheme.typography.headlineSmall,
+        color = MaterialTheme.colorScheme.secondary,
         modifier = modifier
     )
 }
@@ -273,6 +270,7 @@ fun DeveloperDescription(
 ) {
     Text(
         text = text,
+        color = MaterialTheme.colorScheme.onBackground,
         style = MaterialTheme.typography.bodyMedium,
         modifier = modifier
     )
