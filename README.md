@@ -80,20 +80,13 @@ Il s'agit simplement du premier écran de l'application: il a un simple modifier
 
 #### DeveloperFile
 
-Il représente la fiche de profil et il prends beaucoup de paramètres: 
-- 4 String (Name, Title, text, mail)
-- un Array de String appelé skillsList, représentant la liste des compétences de l'utilisateur
-- un booléen **isShown** qui détermine si les compétences sont montrées ou non
-- 2 évènements **onFileClick** et **onSkillsClick**
-- un simple modifier
-
-Il est séparé en 2 parties: une Surface pour gérer le conteneur cliquable (via **onFileClick**) sur la carte , et un composant DeveloperFileContent pour l'organisation interne.
+Il représente la fiche de profil et est séparé en 2 parties: une Surface pour gérer le conteneur cliquable (via **onFileClick**) sur la carte , et un composant DeveloperFileContent pour l'organisation interne.
 
 #### DeveloperFileContent
 
 Comme dit précedemment, il gère l'organisation interne de son composant parent **DeveloperFile** et prend tous ses paramètres à l'exception de **onFileClick**.
 
-Il contient un conteneur de type **Column** qui a un padding interne de 2 dp et contient lui-même 4 composants: **DeveloperHeading**, **DeveloperDescription**, **DeveloperSkillsSection** et **DeveloperMail**.
+Il contient un conteneur de type **Column** qui contient lui-même 4 composants: **DeveloperHeading**, **DeveloperDescription**, un bouton pour cacher le portfolio, **DeveloperPortfolio** (seulement si le booléen **isShown*** est true) et **ContactZone**.
 
 #### DeveloperHeading
 
@@ -113,27 +106,46 @@ Comme son nom l'indique, il affiche le titre du développeur. Par défaut, il a 
 
 Ce composant affiche une présentation du développeur sous forme de text. Par défaut, il occupe sa largeur maximale, a un padding externe de 12 dp et un fontsize de 20 sp.
 
-#### DeveloperSkillsSection
+#### DeveloperPortfolio
 
-Cet élément important permets de gérer tout ce qui concerne les compétences connues par le développeur.
+Cet élément important permets de gérer tout ce qui concerne les parcours du développeur, soit ses compétences et ses expériences.
 
-En effet, son enfant est un conteneur **Column** qui contient lui-même un conteneur **Row** qui affiche un texte ("Mes compétences:") et un composant **ShowSkillsButton**.
+En effet, son enfant est un conteneur **Column** qui contient lui-même plusieurs éléments: **DeveloperSkillsList**, un **Spacer**, et **ExperienceSection**.
 
-De plus, **DeveloperSkillsSection** peut avoir comme paramètre le booléen **isShown**, et dans le cas où ce dernier est True, la **Column** affichera en plus le composant **DeveloperSkillsList**.
 
 #### DeveloperSkillsList
 
-Ce composant gère la liste complète des compétences connues du développeur. Son enfant est un conteneur **Column** possèdant par défaut 3 composants **DeveloperUniqueSkill** à la suite.
+Ce composant gère la liste complète des compétences connues du développeur. Son enfant est un conteneur **Column** possèdant plusieurs éléments à la suite:
+- un **Text**
+- un **spacer**
+- un **LazyRow**, qui contiendra comme items un groupe de plusieurs composants **DeveloperSkillChip**.
 
-A noter que **DeveloperSkillsList** prend pour paramètre un Array de Strings nommé **skillsList** où chacun de ces éléments (3 par défaut) seront affiché par chaque **DeveloperUniqueSkill**. 
+#### DeveloperSkillChip
 
-#### DeveloperUniqueSkill
+Ce composant contient une **Surface** qui contient elle-même un **Text** pour afficher une compétence en particulier.
 
-Ce composant affiche un Text pour une compétence en particulier.
+#### ExperienceSection
+
+Ce composant gère la liste des expériences contenue dans le portfolio du développeur. Son enfant est un conteneur **Column** possèdant plusieurs éléments à la suite:
+- un **Text**
+- un **Spacer**
+- un **LazyColumn**, qui contiendra comme items un groupe de plusieurs composants **ExperienceCard**.
+
+#### ExperienceCard
+
+Centré sur l'affichage d'une expérience du développeur, ce composant contient une **Card** qui contient elle-même un **Column** qui rassemble 3 enfants **Text** pour montrer le titre de l'expérience, ses dates, et sa description.
+
+#### ContactZone
+
+Ce composant est focalisé sur les données de contact du développeur, où il contient une **Surface** avec un **Column** contenant un **Text**, **DeveloperMail** et **DeveloperPhoneNumber**.
 
 #### DeveloperMail
 
-Ce composant affiche un simple texte représentait le mail de contact de l'utilisateur.
+Ce composant affiche un **Text** représentait le mail de contact de l'utilisateur.
+
+#### DeveloperPhoneNumber
+
+Ce composant affiche un **Text** représentait le numéro de téléphone de l'utilisateur.
 
 ##  Quelles notions du chapitre Compose UI avez-vous réutilisées dans cette application ?
 
