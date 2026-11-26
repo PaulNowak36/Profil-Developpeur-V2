@@ -403,15 +403,57 @@ fun DeveloperSkillChip(
 }
 
 @Composable
+fun ContactZone(
+    mail: String,
+    phoneNumber: String,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.large,
+            tonalElevation = 2.dp
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = "Me contacter",
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text = "Jusqu’à -20 % sur une sélection de produits",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+        }
+    }
+}
+
+@Composable
 fun DeveloperMail(
     mail : String,
-    fontSize: Int,
     modifier: Modifier = Modifier
 ) {
 
     Text(
-        text = "Mon mail:  $mail",
-        fontSize = fontSize.sp,
+        text = "Mail:  $mail",
+        style = MaterialTheme.typography.bodyMedium,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun DeveloperPhoneNumber(
+    phoneNumber : String,
+    modifier: Modifier = Modifier
+) {
+
+    Text(
+        text = "Numéro:  $phoneNumber",
+        style = MaterialTheme.typography.bodyMedium,
         modifier = modifier
     )
 }
