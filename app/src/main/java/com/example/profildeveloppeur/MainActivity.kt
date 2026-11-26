@@ -67,9 +67,9 @@ data class ProfilUi(
 
 data class ExperienceUI(
     val id: Int,
-    val experience: String,
-    val datesExperience: String,
-    val descriptionExperience: String,
+    val title: String,
+    val dates: String,
+    val description: String,
 )
 
 fun sampleDeveloper(): ProfilUi {
@@ -99,9 +99,9 @@ fun sampleDeveloper2(): ProfilUi {
 fun sampleExperience(): ExperienceUI {
     return ExperienceUI(
         id = 1,
-        experience = "Développeur Full Stack (Stage)",
-        datesExperience = "Novembre 2025 - Mars 2026",
-        descriptionExperience = "Réalisation de prototypes d'applications web"
+        title = "Développeur Full Stack (Stage)",
+        dates = "Novembre 2025 - Mars 2026",
+        description = "Réalisation de prototypes d'applications web"
     )
 }
 
@@ -110,15 +110,15 @@ fun sampleExperiences(): List<ExperienceUI> {
         sampleExperience(),
         ExperienceUI(
             id = 2,
-            experience = "Informatique embarqué (Stage)",
-            datesExperience = "Mars 2021 - Juin 2021",
-            descriptionExperience = "Prototype de porte automatique pour poulailler"
+            title = "Informatique embarqué (Stage)",
+            dates = "Mars 2021 - Juin 2021",
+            description = "Prototype de porte automatique pour poulailler"
         ),
         ExperienceUI(
             id = 3,
-            experience = "Installation de logiciel (Stage)",
-            datesExperience = "Mars 2021 - Juin 2021",
-            descriptionExperience = "Choix et installation du CRM"
+            title = "Installation de logiciel (Stage)",
+            dates = "Mars 2021 - Juin 2021",
+            description = "Choix et installation du CRM"
         )
     )
 }
@@ -178,7 +178,7 @@ fun DeveloperFileContent(
 ) {
 
     Column (
-        modifier = modifier.fillMaxSize().padding(16.dp)
+        modifier = modifier.fillMaxSize()
     ) {
         DeveloperHeading(
             name = Profile.name,
@@ -202,6 +202,7 @@ fun DeveloperFileContent(
         }
         if (isShown ) {
             DeveloperPortfolio(
+                experienceList = Profile.experiencesList,
                 skillsList = Profile.skillsList,
                 modifier = modifier
             )
@@ -281,6 +282,7 @@ fun DeveloperDescription(
 @Composable
 fun DeveloperPortfolio(
     skillsList: List<String>,
+    experienceList: List<ExperienceUI>,
     modifier: Modifier = Modifier
 ) {
     Column (
@@ -290,11 +292,8 @@ fun DeveloperPortfolio(
                 skillsList = skillsList
             )
             Spacer(Modifier.height(8.dp))
-            ExperienceCard(
-
-                experience = "Développeur Full Stack (Stage)",
-                datesExperience = "Novembre 2025 - Mars 2026",
-                descriptionExperience = "Réalisation de prototypes d'applications web"
+            ExperienceSection(
+                experienceList = experienceList
             )
 
     }
@@ -331,7 +330,7 @@ fun DeveloperSkillsList(
 
 @Composable
 fun ExperienceSection(
-    skillsList: List<String>,
+    experienceList: List<ExperienceUI>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -344,11 +343,11 @@ fun ExperienceSection(
         Spacer(Modifier.height(8.dp))
         LazyColumn(
             modifier = modifier,
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(skillsList) { skill ->
-                DeveloperSkillChip(
-                    label = skill,
+            items(experienceList) { experience ->
+                ExperienceCard(
+                    experience = experience,
                     modifier = modifier
                 )
             }
@@ -359,25 +358,23 @@ fun ExperienceSection(
 
 @Composable
 fun ExperienceCard(
-    experience: String,
-    datesExperience: String,
-    descriptionExperience: String,
+    experience: ExperienceUI,
     modifier: Modifier = Modifier
 ) {
     Card(modifier = modifier) {
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(8.dp)
         ) {
             Text(
-                text = experience,
+                text = experience.title,
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
-                text = "Dates : $datesExperience",
+                text = "Dates : ${experience.dates}",
                 style = MaterialTheme.typography.bodyMedium
             )
             Text(
-                text = descriptionExperience,
+                text = experience.description,
                 style = MaterialTheme.typography.bodyMedium
             )
         }
@@ -403,28 +400,6 @@ fun DeveloperSkillChip(
         )
     }
 
-}
-
-@Composable
-fun ShowSkillsButton(
-    isShown: Boolean,
-    fontSize: Int,
-    onSkillsClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Button(
-        onClick = onSkillsClick,
-        modifier = modifier
-    ) {
-        Text(
-            text = if (isShown) {
-                "Cacher▲"
-            } else {
-                "Montrer▼"
-            },
-            fontSize = fontSize.sp
-        )
-    }
 }
 
 @Composable
