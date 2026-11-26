@@ -46,6 +46,27 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+// Donnée Profil locale
+data class ProfilUi(
+    val name: String,
+    val title: String,
+    val description: String,
+    val mail: String,
+    val phoneNumber: String,
+)
+
+fun sampleDeveloper(): ProfilUi {
+    return ProfilUi(
+        name = "Paul NOWAK",
+        title = "Concepteur Développeur",
+        description = "Etudiant en première année de mastère spécialisé dans l'architecture des logiciels.",
+        mail = "p.nowak@myskolae.fr",
+        phoneNumber = "06 86 92 04 17",
+    )
+}
+
+
+
 // L'écran du profil développeur
 @Composable
 fun DeveloperScreen(modifier: Modifier = Modifier) {
