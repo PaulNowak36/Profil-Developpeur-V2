@@ -51,8 +51,25 @@ DeveloperScreen
             │       │                    └── Text
             │       ├── Spacer
             │       └── ExperienceSection
+            │           └── Column
+            │               ├── Text
+            │               ├── Spacer
+            │               └── LazyColumn
+            │                    └── items (ExperienceCard)
+            │                        └── Card
+            │                            └── Column
+            │                                ├── Text
+            │                                ├── Text
+            │                                └── Text
             └── ContactZone
-                └── Text
+                └── Box
+                    └── Column
+                        └── Surface
+                            ├── Text
+                            ├── DeveloperMail
+                            │   └── Text
+                            └── DeveloperPhoneNumber
+                                └── Text
 ```
 
 Concernant les différents composables:
