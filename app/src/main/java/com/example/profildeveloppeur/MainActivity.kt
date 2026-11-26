@@ -168,10 +168,8 @@ fun DeveloperFileContent(
             )
         }
         if (isShown ) {
-            DeveloperSkillsSection(
-                fontSize = 18,
+            DeveloperPortfolio(
                 skillsList = skillsList,
-                isShown = isShown,
                 modifier = modifier
             )
         }
@@ -249,32 +247,16 @@ fun DeveloperDescription(
 }
 
 @Composable
-fun DeveloperSkillsSection(
-    fontSize: Int,
+fun DeveloperPortfolio(
     skillsList: List<String>,
-    isShown: Boolean,
     modifier: Modifier = Modifier
 ) {
-    Column {
-
-        Row (
+    Column (
             modifier = modifier,
         ){
-            Text(
-                text = "Mes compétences :",
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                modifier = modifier.weight(1f)
-            )
-
-        }
-        if (isShown) {
             DeveloperSkillsList(
-                fontSize = fontSize,
                 skillsList = skillsList
             )
-        }
-
 
     }
 
@@ -282,19 +264,26 @@ fun DeveloperSkillsSection(
 
 @Composable
 fun DeveloperSkillsList(
-    fontSize: Int,
     skillsList: List<String>,
     modifier: Modifier = Modifier
 ) {
-    LazyRow(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    Column(
+        modifier = modifier
     ) {
-        items(skillsList) { skill ->
-            DeveloperSkillChip(
-                label = skill,
-                modifier = modifier
-            )
+        Text(
+            text = "Mes compétences :",
+            style = MaterialTheme.typography.titleMedium,
+        )
+        LazyRow(
+            modifier = modifier,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(skillsList) { skill ->
+                DeveloperSkillChip(
+                    label = skill,
+                    modifier = modifier
+                )
+            }
         }
     }
 
