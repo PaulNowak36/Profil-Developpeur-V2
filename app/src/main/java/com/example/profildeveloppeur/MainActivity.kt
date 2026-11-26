@@ -189,7 +189,7 @@ fun DeveloperFileContent(
             text = Profile.description,
             modifier = modifier
                 .fillMaxWidth()
-                .padding(12.dp)
+                
         )
         Button(onClick = onPortfolioClick) {
             Text(
@@ -207,9 +207,9 @@ fun DeveloperFileContent(
                 modifier = modifier
             )
         }
-        DeveloperMail(
+        ContactZone(
             mail = Profile.mail,
-            fontSize = 20,
+            phoneNumber = Profile.phoneNumber,
             modifier = modifier
         )
     }
@@ -417,15 +417,17 @@ fun ContactZone(
             tonalElevation = 2.dp
         ) {
             Column(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(10.dp)
             ) {
                 Text(
                     text = "Me contacter",
                     style = MaterialTheme.typography.titleMedium
                 )
-                Text(
-                    text = "Jusqu’à -20 % sur une sélection de produits",
-                    style = MaterialTheme.typography.bodyMedium
+                DeveloperMail(
+                    mail = mail,
+                )
+                DeveloperPhoneNumber(
+                    phoneNumber = phoneNumber,
                 )
             }
         }
