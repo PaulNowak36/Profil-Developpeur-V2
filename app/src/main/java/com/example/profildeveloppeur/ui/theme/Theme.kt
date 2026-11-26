@@ -52,7 +52,7 @@ fun ProfilDeveloppeurTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = ProductTypography,
         content = content
     )
 }

@@ -247,7 +247,7 @@ fun DeveloperName(
 ) {
     Text(
         text = name,
-        fontSize = fontSize.sp,
+        style = MaterialTheme.typography.headlineMedium,
         modifier = modifier,
         color = Color.Red
     )
@@ -261,8 +261,7 @@ fun DeveloperTitle(
 ) {
     Text(
         text = title,
-        fontSize = fontSize.sp,
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.headlineSmall,
         modifier = modifier
     )
 }
