@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -144,7 +146,7 @@ fun DeveloperFileContent(
 ) {
 
     Column (
-        modifier = modifier.padding(2.dp)
+        modifier = modifier.fillMaxSize().padding(16.dp)
     ) {
         DeveloperHeading(
             name = name,
@@ -153,7 +155,6 @@ fun DeveloperFileContent(
         )
         DeveloperDescription(
             text = text,
-            fontSize = 20,
             modifier = modifier
                 .fillMaxWidth()
                 .padding(12.dp)
@@ -236,12 +237,11 @@ fun DeveloperTitle(
 @Composable
 fun DeveloperDescription(
     text: String,
-    fontSize: Int,
     modifier: Modifier = Modifier
 ) {
     Text(
         text = text,
-        fontSize = fontSize.sp,
+        style = MaterialTheme.typography.bodyMedium,
         modifier = modifier
     )
 }
@@ -252,10 +252,17 @@ fun DeveloperPortfolio(
     modifier: Modifier = Modifier
 ) {
     Column (
-            modifier = modifier,
+            modifier = modifier.fillMaxWidth(),
         ){
             DeveloperSkillsList(
                 skillsList = skillsList
+            )
+            Spacer(Modifier.height(8.dp))
+            ExperienceCard(
+
+                experience = "Développeur Full Stack (Stage)",
+                datesExperience = "Novembre 2025 - Mars 2026",
+                descriptionExperience = "Réalisation de prototypes d'applications web"
             )
 
     }
@@ -274,6 +281,7 @@ fun DeveloperSkillsList(
             text = "Mes compétences :",
             style = MaterialTheme.typography.titleMedium,
         )
+        Spacer(Modifier.height(8.dp))
         LazyRow(
             modifier = modifier,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -287,6 +295,35 @@ fun DeveloperSkillsList(
         }
     }
 
+}
+
+
+
+@Composable
+fun ExperienceCard(
+    experience: String,
+    datesExperience: String,
+    descriptionExperience: String,
+    modifier: Modifier = Modifier
+) {
+    Card(modifier = modifier) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = experience,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Text(
+                text = "Dates : $datesExperience",
+                style = MaterialTheme.typography.bodyMedium
+            )
+            Text(
+                text = descriptionExperience,
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+    }
 }
 
 
