@@ -110,15 +110,15 @@ Il contient une **Surface** de couleur LightGray, puis un **Column** qui contien
  
 #### DeveloperName
  
-Comme son nom l'indique, il affiche le nom du développeur. Par défaut, il a une couleur rouge et un fontSize de 35 sp.
+Comme son nom l'indique, il affiche le nom du développeur. 
  
 #### DeveloperTitle
  
-Comme son nom l'indique, il affiche le titre du développeur. Par défaut, il a un FontWeight Bold et un fontSize de 35 sp.
+Comme son nom l'indique, il affiche le titre du développeur. 
  
 #### DeveloperDescription
  
-Ce composant affiche une présentation du développeur sous forme de texte. Par défaut, il occupe sa largeur maximale, a un padding externe de 12 dp et un fontSize de 20 sp.
+Ce composant affiche une présentation du développeur sous forme de texte.
  
 #### DeveloperPortfolio
  
