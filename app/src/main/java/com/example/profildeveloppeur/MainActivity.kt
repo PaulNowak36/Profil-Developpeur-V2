@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
             ProfilDeveloppeurTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     DeveloperScreen(
+                        profil = sampleDeveloper(),
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -53,6 +54,7 @@ data class ProfilUi(
     val description: String,
     val mail: String,
     val phoneNumber: String,
+    val skillsList: List<String>
 )
 
 fun sampleDeveloper(): ProfilUi {
@@ -60,6 +62,7 @@ fun sampleDeveloper(): ProfilUi {
         name = "Paul NOWAK",
         title = "Concepteur Développeur",
         description = "Etudiant en première année de mastère spécialisé dans l'architecture des logiciels.",
+        skillsList = listOf("C++", "Python", "TypeScript"),
         mail = "p.nowak@myskolae.fr",
         phoneNumber = "06 86 92 04 17",
     )
@@ -69,13 +72,13 @@ fun sampleDeveloper(): ProfilUi {
 
 // L'écran du profil développeur
 @Composable
-fun DeveloperScreen(modifier: Modifier = Modifier) {
+fun DeveloperScreen(profil: ProfilUi, modifier: Modifier = Modifier) {
     DeveloperFile(
-        name = "Paul NOWAK",
-        title = "Développeur C++",
-        text = "Etudiant en première année de mastère spécialisé dans l'architecture des logiciels.",
-        skillsList = arrayOf("C#", "Python", "React"),
-        mail = "p.nowak@myskolae.fr",
+        name = profil.name,
+        title = profil.title,
+        text = profil.description,
+        skillsList = profil.skillsList,
+        mail = profil.mail,
         isShown = true,
         onFileClick = {
             // Plus tard : ouvrir le détail de la fiche développeur
@@ -93,7 +96,7 @@ fun DeveloperFile(
     title: String,
     text: String,
     mail: String,
-    skillsList: Array<String>,
+    skillsList: List<String>,
     isShown: Boolean,
     onFileClick: () -> Unit,
     onSkillsClick: () -> Unit,
@@ -129,7 +132,7 @@ fun DeveloperFileContent(
     title: String,
     text: String,
     mail: String,
-    skillsList: Array<String>,
+    skillsList: List<String>,
     isShown: Boolean,
     onSkillsClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -233,7 +236,7 @@ fun DeveloperDescription(
 @Composable
 fun DeveloperSkillsSection(
     fontSize: Int,
-    skillsList: Array<String>,
+    skillsList: List<String>,
     isShown: Boolean,
     onSkillsClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -272,7 +275,7 @@ fun DeveloperSkillsSection(
 @Composable
 fun DeveloperSkillsList(
     fontSize: Int,
-    skillsList: Array<String>,
+    skillsList: List<String>,
     modifier: Modifier = Modifier
 ) {
 
@@ -351,7 +354,7 @@ fun DeveloperMail(
 @Composable
 fun DeveloperScreenPreview() {
     ProfilDeveloppeurTheme {
-        DeveloperScreen()
+        DeveloperScreen(profil = sampleDeveloper())
     }
 }
 
@@ -363,7 +366,7 @@ fun ProductSkillsShownPreview() {
             name = "Paul NOWAK",
             title = "Concepteur Développeur",
             text = "Etudiant en première année de mastère spécialisé dans l'architecture des logiciels.",
-            skillsList = arrayOf("C++", "Python", "TypeScript"),
+            skillsList = listOf("C++", "Python", "TypeScript"),
             mail = "p.nowak@myskolae.fr",
             isShown = true,
             onFileClick = {
@@ -386,7 +389,7 @@ fun ProductSkillsHiddenPreview() {
             name = "Paul NOWAK",
             title = "Développeur Full Stack",
             text = "Etudiant en première année de mastère spécialisé dans l'architecture des logiciels.",
-            skillsList = arrayOf("C++", "React", "HTML"),
+            skillsList = listOf("C++", "React", "HTML"),
             mail = "p.nowak@myskolae.fr",
             isShown = false,
             onFileClick = {
