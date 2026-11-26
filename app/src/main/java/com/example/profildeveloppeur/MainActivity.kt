@@ -84,6 +84,18 @@ fun sampleDeveloper(): ProfilUi {
     )
 }
 
+fun sampleDeveloper2(): ProfilUi {
+    return ProfilUi(
+        name = "Paul NOWAK",
+        title = "Développeur Full Stack",
+        skillsList = listOf("C++", "React", "HTML"),
+        description = "Etudiant en première année de mastère spécialisé dans l'architecture des logiciels.",
+        mail = "p.nowak@myskolae.fr",
+        experiencesList = sampleExperiences(),
+        phoneNumber = "06 86 92 04 17",
+    )
+}
+
 fun sampleExperience(): ExperienceUI {
     return ExperienceUI(
         id = 1,
@@ -117,11 +129,7 @@ fun sampleExperiences(): List<ExperienceUI> {
 @Composable
 fun DeveloperScreen(profil: ProfilUi, modifier: Modifier = Modifier) {
     DeveloperFile(
-        name = profil.name,
-        title = profil.title,
-        text = profil.description,
-        skillsList = profil.skillsList,
-        mail = profil.mail,
+        profile = sampleDeveloper(),
         isShown = true,
         onPortfolioClick = {
             // Plus tard : afficher le portfolio du développeur
@@ -135,11 +143,7 @@ fun DeveloperScreen(profil: ProfilUi, modifier: Modifier = Modifier) {
 
 @Composable
 fun DeveloperFile(
-    name: String,
-    title: String,
-    text: String,
-    mail: String,
-    skillsList: List<String>,
+    profile: ProfilUi,
     isShown: Boolean,
     onPortfolioClick: () -> Unit,
     onFileClick: () -> Unit,
@@ -153,15 +157,11 @@ fun DeveloperFile(
                 onClick = onFileClick
             )
             .semantics {
-                contentDescription = "Ouvrir le détail de la fiche développeur de $name"
+                contentDescription = "Ouvrir le détail de la fiche développeur."
             }
     ) {
         DeveloperFileContent(
-            name = name,
-            title = title,
-            text = text,
-            mail = mail,
-            skillsList = skillsList,
+            Profile = profile,
             isShown = isShown,
             onPortfolioClick = onPortfolioClick,
             modifier = modifier
@@ -171,11 +171,7 @@ fun DeveloperFile(
 
 @Composable
 fun DeveloperFileContent(
-    name: String,
-    title: String,
-    text: String,
-    mail: String,
-    skillsList: List<String>,
+    Profile: ProfilUi,
     isShown: Boolean,
     onPortfolioClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -185,12 +181,12 @@ fun DeveloperFileContent(
         modifier = modifier.fillMaxSize().padding(16.dp)
     ) {
         DeveloperHeading(
-            name = name,
-            title = title,
+            name = Profile.name,
+            title = Profile.title,
             modifier = modifier.fillMaxWidth()
         )
         DeveloperDescription(
-            text = text,
+            text = Profile.description,
             modifier = modifier
                 .fillMaxWidth()
                 .padding(12.dp)
@@ -206,12 +202,12 @@ fun DeveloperFileContent(
         }
         if (isShown ) {
             DeveloperPortfolio(
-                skillsList = skillsList,
+                skillsList = Profile.skillsList,
                 modifier = modifier
             )
         }
         DeveloperMail(
-            mail = mail,
+            mail = Profile.mail,
             fontSize = 20,
             modifier = modifier
         )
@@ -459,11 +455,7 @@ fun DeveloperScreenPreview() {
 fun ProductSkillsShownPreview() {
     ProfilDeveloppeurTheme {
         DeveloperFile(
-            name = "Paul NOWAK",
-            title = "Concepteur Développeur",
-            text = "Etudiant en première année de mastère spécialisé dans l'architecture des logiciels.",
-            skillsList = listOf("C++", "Python", "TypeScript"),
-            mail = "p.nowak@myskolae.fr",
+            profile = sampleDeveloper2(),
             isShown = true,
             onPortfolioClick = {
                 // Plus tard : afficher le portfolio du développeur
@@ -482,11 +474,7 @@ fun ProductSkillsShownPreview() {
 fun ProductSkillsHiddenPreview() {
     ProfilDeveloppeurTheme {
         DeveloperFile(
-            name = "Paul NOWAK",
-            title = "Développeur Full Stack",
-            text = "Etudiant en première année de mastère spécialisé dans l'architecture des logiciels.",
-            skillsList = listOf("C++", "React", "HTML"),
-            mail = "p.nowak@myskolae.fr",
+            profile = sampleDeveloper2(),
             isShown = false,
             onPortfolioClick = {
                 // Plus tard : afficher le portfolio du développeur
