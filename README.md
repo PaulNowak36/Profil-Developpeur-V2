@@ -6,17 +6,31 @@ Dans ce devoir, on affiche la fiche profil d'un étudiant développeur afin de c
 
 ![Capture de l'écran d'accueil](Images/Ecran_principal.png)
 
- L'écran possède 2 previews: une preview où les compétences sont montrées, et une autre où les compétences sont masquées.
+L'écran possède 2 previews: une preview où les compétences sont montrées, et une autre où les compétences sont masquées.
 
- ![Capture de la preview des compétences cachées](Images/SkillsHidden_Preview.png)
+![Capture de la preview des compétences montrées](Images/SkillsShown_Preview.png)
 
- ![Capture de la preview des compétences montrées](Images/SkillsShown_Preview.png)
+![Capture de la preview des compétences cachées](Images/SkillsHidden_Preview.png)
  
 ## Composition du projet
 
-### Thème
+### ProfilDeveloppeurTheme
 
-Le thème du projet s'intitule **ProfilDeveloppeurTheme**: c'est lui qui gère l'apparence générale de l'application et qui contient le **Scaffold** (l'échafaudage) qui s'occupera de la structure de base de l'écran
+Le thème du projet s'intitule **ProfilDeveloppeurTheme**: c'est lui qui gère l'apparence générale de l'application et qui contient le **Scaffold** (l'échafaudage) qui s'occupera de la structure de base de l'écran. Il est étoffé davantage dans le fichier **Thème.kt**.
+
+#### ColorScheme
+
+Le **ColorScheme** est séparée en 2 familles: **LightColorScheme** et **DarkColorScheme**, qui affichent les couleurs pour respectivement les mode jour et nuit de l'application, et faciliter l'interface. Malheureusement, et par manque de temps, seul la version **jour** peut être testé.
+
+Des couleurs majoritairement **Bleu** sont utilisées, notamment pour souligner l'importance du **nom** du profil, ainsi que le bouton pour afficher/cacher le **Portfolio** et les différents jetons **Compétences**. 
+
+#### ProductShapes
+
+Les **shapes** de certains composants comme la surface des jetons **compétences** ou celle des différentes **expériences** sont gérées dans **ProductShapes**, qui gèrent les coins de bordures et les padding internes.
+
+#### ProductTypography
+
+La typographie est gérée dans le fichier **Type.kt**, avec **ProductTypography** qui classent les différents styles de texte avec des tailles de texte et des fontWeight différentes, que ce soit pour le titre du développeur ou simplement une description.
 
 ### Les différents composables
 
@@ -149,4 +163,4 @@ Ce composant affiche un **Text** représentait le numéro de téléphone de l'ut
 
 ##  Quelles notions du chapitre Compose UI avez-vous réutilisées dans cette application ?
 
-J'ai utilisé les LazyRow, les LazyColumn
+J'ai utilisé les **LazyRow**, les **LazyColumn**, les **Card**, les **Spacer**, les **Box**
