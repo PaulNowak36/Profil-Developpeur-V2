@@ -85,6 +85,9 @@ fun DeveloperScreen(profil: ProfilUi, modifier: Modifier = Modifier) {
         skillsList = profil.skillsList,
         mail = profil.mail,
         isShown = true,
+        onPortfolioClick = {
+            // Plus tard : afficher le portfolio du développeur
+        },
         onFileClick = {
             // Plus tard : ouvrir le détail de la fiche développeur
         },
@@ -103,6 +106,7 @@ fun DeveloperFile(
     mail: String,
     skillsList: List<String>,
     isShown: Boolean,
+    onPortfolioClick: () -> Unit,
     onFileClick: () -> Unit,
     onSkillsClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -125,6 +129,7 @@ fun DeveloperFile(
             mail = mail,
             skillsList = skillsList,
             isShown = isShown,
+            onPortfolioClick = onPortfolioClick,
             onSkillsClick = onSkillsClick,
             modifier = modifier
         )
@@ -139,6 +144,7 @@ fun DeveloperFileContent(
     mail: String,
     skillsList: List<String>,
     isShown: Boolean,
+    onPortfolioClick: () -> Unit,
     onSkillsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -158,6 +164,9 @@ fun DeveloperFileContent(
                 .fillMaxWidth()
                 .padding(12.dp)
         )
+        Button(onClick = onPortfolioClick) {
+            Text(text = "Voir le portfolio")
+        }
         DeveloperSkillsSection(
             fontSize = 18,
             skillsList = skillsList,
@@ -376,6 +385,9 @@ fun ProductSkillsShownPreview() {
             skillsList = listOf("C++", "Python", "TypeScript"),
             mail = "p.nowak@myskolae.fr",
             isShown = true,
+            onPortfolioClick = {
+                // Plus tard : afficher le portfolio du développeur
+            },
             onFileClick = {
                 // Plus tard : ouvrir le détail de la fiche développeur
             },
@@ -399,6 +411,9 @@ fun ProductSkillsHiddenPreview() {
             skillsList = listOf("C++", "React", "HTML"),
             mail = "p.nowak@myskolae.fr",
             isShown = false,
+            onPortfolioClick = {
+                // Plus tard : afficher le portfolio du développeur
+            },
             onFileClick = {
                 // Plus tard : ouvrir le détail de la fiche développeur
             },
