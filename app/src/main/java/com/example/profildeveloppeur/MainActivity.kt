@@ -61,7 +61,15 @@ data class ProfilUi(
     val description: String,
     val mail: String,
     val phoneNumber: String,
-    val skillsList: List<String>
+    val skillsList: List<String>,
+    val experiencesList: List<ExperienceUI>
+)
+
+data class ExperienceUI(
+    val id: Int,
+    val experience: String,
+    val datesExperience: String,
+    val descriptionExperience: String,
 )
 
 fun sampleDeveloper(): ProfilUi {
@@ -70,8 +78,36 @@ fun sampleDeveloper(): ProfilUi {
         title = "Concepteur Développeur",
         description = "Etudiant en première année de mastère spécialisé dans l'architecture des logiciels.",
         skillsList = listOf("C++", "Python", "TypeScript"),
+        experiencesList = sampleExperiences(),
         mail = "p.nowak@myskolae.fr",
         phoneNumber = "06 86 92 04 17",
+    )
+}
+
+fun sampleExperience(): ExperienceUI {
+    return ExperienceUI(
+        id = 1,
+        experience = "Développeur Full Stack (Stage)",
+        datesExperience = "Novembre 2025 - Mars 2026",
+        descriptionExperience = "Réalisation de prototypes d'applications web"
+    )
+}
+
+fun sampleExperiences(): List<ExperienceUI> {
+    return listOf(
+        sampleExperience(),
+        ExperienceUI(
+            id = 2,
+            experience = "Informatique embarqué (Stage)",
+            datesExperience = "Mars 2021 - Juin 2021",
+            descriptionExperience = "Prototype de porte automatique pour poulailler"
+        ),
+        ExperienceUI(
+            id = 3,
+            experience = "Installation de logiciel (Stage)",
+            datesExperience = "Mars 2021 - Juin 2021",
+            descriptionExperience = "Choix et installation du CRM"
+        )
     )
 }
 
@@ -297,7 +333,33 @@ fun DeveloperSkillsList(
 
 }
 
+@Composable
+fun ExperienceSection(
+    skillsList: List<String>,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+    ) {
+        Text(
+            text = "Mes expériences :",
+            style = MaterialTheme.typography.titleMedium,
+        )
+        Spacer(Modifier.height(8.dp))
+        LazyColumn(
+            modifier = modifier,
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            items(skillsList) { skill ->
+                DeveloperSkillChip(
+                    label = skill,
+                    modifier = modifier
+                )
+            }
+        }
+    }
 
+}
 
 @Composable
 fun ExperienceCard(
