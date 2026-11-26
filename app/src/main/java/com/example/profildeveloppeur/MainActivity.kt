@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +14,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -278,36 +282,31 @@ fun DeveloperSkillsList(
     skillsList: List<String>,
     modifier: Modifier = Modifier
 ) {
-
-    Column {
-        DeveloperUniqueSkill(
-            skill = skillsList[0],
-            fontSize = fontSize,
-            modifier = modifier
-        )
-        DeveloperUniqueSkill(
-            skill = skillsList[1],
-            fontSize = fontSize,
-            modifier = modifier
-        )
-        DeveloperUniqueSkill(
-            skill = skillsList[2],
-            fontSize = fontSize,
-            modifier = modifier
-        )
+    LazyRow(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(skillsList) { skill ->
+            DeveloperUniqueSkill(
+                label = skill,
+                fontSize = fontSize,
+                modifier = modifier
+            )
+        }
     }
+
 }
 
 
 @Composable
 fun DeveloperUniqueSkill(
-    skill : String,
+    label : String,
     fontSize: Int,
     modifier: Modifier = Modifier
 ) {
 
     Text(
-        text = "- $skill",
+        text = "$label",
         fontSize = fontSize.sp,
         modifier = modifier
     )
