@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -287,7 +288,7 @@ fun DeveloperSkillsList(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(skillsList) { skill ->
-            DeveloperUniqueSkill(
+            DeveloperSkillChip(
                 label = skill,
                 fontSize = fontSize,
                 modifier = modifier
@@ -299,17 +300,24 @@ fun DeveloperSkillsList(
 
 
 @Composable
-fun DeveloperUniqueSkill(
+fun DeveloperSkillChip(
     label : String,
     fontSize: Int,
     modifier: Modifier = Modifier
 ) {
+    Surface(
+        modifier = modifier,
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.primary
 
-    Text(
-        text = "$label",
-        fontSize = fontSize.sp,
-        modifier = modifier
-    )
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+        )
+    }
+
 }
 
 @Composable
