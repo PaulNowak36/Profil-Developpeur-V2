@@ -91,9 +91,6 @@ fun DeveloperScreen(profil: ProfilUi, modifier: Modifier = Modifier) {
         onFileClick = {
             // Plus tard : ouvrir le détail de la fiche développeur
         },
-        onSkillsClick = {
-            // Plus tard : Montrer les compétences
-        },
         modifier = modifier.padding(16.dp)
     )
 }
@@ -108,7 +105,6 @@ fun DeveloperFile(
     isShown: Boolean,
     onPortfolioClick: () -> Unit,
     onFileClick: () -> Unit,
-    onSkillsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Surface(
@@ -130,7 +126,6 @@ fun DeveloperFile(
             skillsList = skillsList,
             isShown = isShown,
             onPortfolioClick = onPortfolioClick,
-            onSkillsClick = onSkillsClick,
             modifier = modifier
         )
     }
@@ -145,7 +140,6 @@ fun DeveloperFileContent(
     skillsList: List<String>,
     isShown: Boolean,
     onPortfolioClick: () -> Unit,
-    onSkillsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -165,15 +159,22 @@ fun DeveloperFileContent(
                 .padding(12.dp)
         )
         Button(onClick = onPortfolioClick) {
-            Text(text = "Voir le portfolio")
+            Text(
+                text = if (isShown) {
+                    "Cacher le portfolio ▲"
+                } else {
+                    "Montrer le portfolio ▼"
+                },
+            )
         }
-        DeveloperSkillsSection(
-            fontSize = 18,
-            skillsList = skillsList,
-            isShown = isShown,
-            onSkillsClick = onSkillsClick,
-            modifier = modifier
-        )
+        if (isShown ) {
+            DeveloperSkillsSection(
+                fontSize = 18,
+                skillsList = skillsList,
+                isShown = isShown,
+                modifier = modifier
+            )
+        }
         DeveloperMail(
             mail = mail,
             fontSize = 20,
@@ -252,7 +253,6 @@ fun DeveloperSkillsSection(
     fontSize: Int,
     skillsList: List<String>,
     isShown: Boolean,
-    onSkillsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column {
@@ -267,12 +267,6 @@ fun DeveloperSkillsSection(
                 modifier = modifier.weight(1f)
             )
 
-            ShowSkillsButton(
-                isShown = isShown,
-                fontSize = fontSize - 6,
-                onSkillsClick = onSkillsClick,
-                modifier = modifier
-            )
         }
         if (isShown) {
             DeveloperSkillsList(
@@ -299,7 +293,6 @@ fun DeveloperSkillsList(
         items(skillsList) { skill ->
             DeveloperSkillChip(
                 label = skill,
-                fontSize = fontSize,
                 modifier = modifier
             )
         }
@@ -311,7 +304,6 @@ fun DeveloperSkillsList(
 @Composable
 fun DeveloperSkillChip(
     label : String,
-    fontSize: Int,
     modifier: Modifier = Modifier
 ) {
     Surface(
@@ -391,9 +383,6 @@ fun ProductSkillsShownPreview() {
             onFileClick = {
                 // Plus tard : ouvrir le détail de la fiche développeur
             },
-            onSkillsClick = {
-                // Plus tard : Montrer les compétences
-            },
             modifier = Modifier
                 .padding(16.dp)
         )
@@ -416,9 +405,6 @@ fun ProductSkillsHiddenPreview() {
             },
             onFileClick = {
                 // Plus tard : ouvrir le détail de la fiche développeur
-            },
-            onSkillsClick = {
-                // Plus tard : Montrer les compétences
             },
             modifier = Modifier
                 .padding(16.dp)
